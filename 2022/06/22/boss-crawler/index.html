@@ -29,9 +29,9 @@
 <meta property="og:site_name" content="bbbbbbbin&#39;s blog">
 <meta property="og:description" content="BOSS直聘指定岗位指定城市的各项数据">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://bbbbbbbin.github.io/2022/06/22/boss-crawler/image/boss-crawler/1655886953981.png">
-<meta property="og:image" content="https://bbbbbbbin.github.io/2022/06/22/boss-crawler/image/boss-crawler/1655887859970.png">
-<meta property="og:image" content="https://bbbbbbbin.github.io/2022/06/22/boss-crawler/image/boss-crawler/1655889538144.png">
+<meta property="og:image" content="https://bbbbbbbin.github.io/img/1.png">
+<meta property="og:image" content="https://bbbbbbbin.github.io/img/2.png">
+<meta property="og:image" content="https://bbbbbbbin.github.io/img/3.png">
 <meta property="article:published_time" content="2022-06-22T02:11:41.000Z">
 <meta property="article:modified_time" content="2022-06-22T08:10:35.000Z">
 <meta property="article:author" content="hcb">
@@ -40,7 +40,7 @@
 <meta property="article:tag" content="beautifulsoup">
 <meta property="article:tag" content="re">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://bbbbbbbin.github.io/2022/06/22/boss-crawler/image/boss-crawler/1655886953981.png">
+<meta name="twitter:image" content="https://bbbbbbbin.github.io/img/1.png">
                         
                                 
                                         
@@ -216,7 +216,7 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+     style="background: url('/img/banner.png') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
@@ -312,21 +312,19 @@
 <p>网址主要重点观察3个变量，<strong>c101280100，query=数据分析，page=1</strong>，其中第一个变量通过查找不同城市的数据之后，观察网址可以知道，这是一串网站定义的城市代码，因而我们需要先获取到这一串城市代码，才能补充完网址，后两个变量比较好理解，分别是岗位名称和查找到的职位的页数。</p>
 <hr>
 <p>进入网址后，按F12查看页面信息，可以看到有一个<strong>class为job-list</strong>的div，其底下每一个<strong>li模块</strong>代表着一项职位信息，因此我们主要是想办法从页面中获取到所有的<strong>li模块</strong>，然后对每一个li模块进行解析，获取想要的信息。</p>
-<p><img src="image/boss-crawler/1655886953981.png" srcset="/img/loading.gif" lazyload alt="1655886953981"></p>
+<p><img src="/img/1.png" srcset="/img/loading.gif" lazyload alt="1"></p>
 <h3 id="获取城市代码数据"><a href="#获取城市代码数据" class="headerlink" title="获取城市代码数据"></a>获取城市代码数据</h3><p>想要填充完整网址， 必须先获得城市对应的代码数据</p>
-<p><img src="image/boss-crawler/1655887859970.png" srcset="/img/loading.gif" lazyload alt="1655887859970"></p>
+<p><img src="/img/2.png" srcset="/img/loading.gif" lazyload alt="2"></p>
 <p>通过对网站数据包的观察，可以看到，有一个网页包含着对应的json数据，因此直接使用request库的获取到json数据，构造一个[<strong>城市-代码</strong>]的字典后续使用。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">get_citydata</span>():<br>    citycode_data = &#123;&#125;  <br>    url = <span class="hljs-string">&#x27;https://www.zhipin.com/wapi/zpgeek/common/data/citysites.json&#x27;</span><br>    response = requests.get(url)<br>    data = response.content<br>    data = json.loads(data)<br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> data[<span class="hljs-string">&#x27;zpData&#x27;</span>]:<br>        <span class="hljs-keyword">if</span> i[<span class="hljs-string">&quot;name&quot;</span>] <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> citycode_data:<br>            citycode_data[i[<span class="hljs-string">&#x27;name&#x27;</span>]] = i[<span class="hljs-string">&#x27;code&#x27;</span>]<br>    <span class="hljs-keyword">return</span> citycode_data<br></code></pre></td></tr></table></figure>
-
 
 <h3 id="获取职位搜索的网页页面"><a href="#获取职位搜索的网页页面" class="headerlink" title="获取职位搜索的网页页面"></a>获取职位搜索的网页页面</h3><p>定义一个函数，给定城市名，职位，页数，获取到相关的页面。</p>
 <p>因为尝试直接使用request获取页面会报错，因此使用了selenium模拟浏览器获取数据</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">get_url</span>(<span class="hljs-params">job,city,pages,citycode</span>):<br>    <span class="hljs-comment"># citycode为上述 城市-代码 字典</span><br>    url = <span class="hljs-string">&#x27;https://www.zhipin.com/c&#123;0&#125;/?query=&#123;1&#125;&amp;page=&#123;2&#125;&#x27;</span>.<span class="hljs-built_in">format</span>(citycode[city], urllib.parse.quote(job), pages)<br>    <span class="hljs-comment"># 浏览器设置</span><br>    options = webdriver.ChromeOptions()<br>    options.add_experimental_option(<span class="hljs-string">&quot;excludeSwitches&quot;</span>, [<span class="hljs-string">&#x27;enable-automation&#x27;</span>,<span class="hljs-string">&#x27;enable-logging&#x27;</span>])<br>    options.add_argument(<span class="hljs-string">&#x27;-ignore-certificate-errors&#x27;</span>)<br>    options.add_argument(<span class="hljs-string">&#x27;-ignore -ssl-errors&#x27;</span>)<br>    options.add_argument(<span class="hljs-string">&quot;headless&quot;</span>)<br>    <span class="hljs-comment"># 定义一个浏览器</span><br>    browser = webdriver.Chrome(<span class="hljs-string">&#x27;crawler\chromedriver.exe&#x27;</span>,chrome_options=options)<br>    <span class="hljs-comment"># 合理的等待时间</span><br>    time.sleep(random.randrange(<span class="hljs-number">3</span>,<span class="hljs-number">8</span>))<br>    <span class="hljs-comment"># 通过find_element找到job-list元素，并解析成innerhtml对象</span><br>    data = browser.find_element(By.CLASS_NAME, <span class="hljs-string">&#x27;job-list&#x27;</span>)<br>    data = data.get_attribute(<span class="hljs-string">&#x27;innerHTML&#x27;</span>)<br>    browser.quit()<br>    <span class="hljs-keyword">return</span>(data)<br></code></pre></td></tr></table></figure>
 
-
 <h3 id="解析处理页面"><a href="#解析处理页面" class="headerlink" title="解析处理页面"></a>解析处理页面</h3><p>获取到网页页面后，返回的是class为job-list的div下的所有信息，因此需要对信息进行解析处理。</p>
 <p>定义一个解析页面的函数，对上述获取到的页面进行beautifulsoup，选出<strong>li模块</strong>，针对每一个<strong>li模块</strong>，观察其页面中想要获取的数据的情况，红色框代表我想要获取的信息，蓝色框表示可以通过这些class名获取到这些信息</p>
-<p><img src="image/boss-crawler/1655889538144.png" srcset="/img/loading.gif" lazyload alt="1655889538144"></p>
+<p><img src="/img/3.png" srcset="/img/loading.gif" lazyload alt="3"></p>
 <p>可以看到，可以获取到以下的数据</p>
 <p><strong>工作标题，工作链接，工作地点，薪资，年限，学历，公司名，公司链接，公司行业，融资情况，人数，工作标签，公司福利</strong></p>
 <p>使用beautifulsoup的select方法，获取指定类名下或标签下的文本或链接。</p>
