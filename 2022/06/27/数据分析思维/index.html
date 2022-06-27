@@ -1,0 +1,1089 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/echarts@4.8.0/dist/echarts.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/echarts-gl@1.1.1/dist/echarts-gl.min.js"></script>
+
+    <script type="text/javascript" src="https://assets.pyecharts.org/assets/echarts-wordcloud.min.js"></script>
+
+
+    <head>
+        <meta charset="UTF-8">
+        <link rel="apple-touch-icon" sizes="76x76" href="/img/icon.jpg">
+        <link rel="icon" href="/img/icon.jpg">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        
+                <meta name="theme-color" content="#2f4154">
+                <meta name="author" content="hcb">
+                <meta name="keywords" content="">
+                
+                    <meta name="description" content="数据分析思维学习，从大量事物中发现关键信息，用于直接决策，而不是辅助">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据分析思维学习笔记">
+<meta property="og:url" content="https://bbbbbbbin.github.io/2022/06/27/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%80%9D%E7%BB%B4/index.html">
+<meta property="og:site_name" content="bbbbbbbin&#39;s blog">
+<meta property="og:description" content="数据分析思维学习，从大量事物中发现关键信息，用于直接决策，而不是辅助">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://bbbbbbbin.github.io/2022/06/27/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%80%9D%E7%BB%B4/..%5Cimg%5Cdata_analysis_thinking%5C1.png">
+<meta property="og:image" content="https://bbbbbbbin.github.io/2022/06/27/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%80%9D%E7%BB%B4/..%5Cimg%5Cdata_analysis_thinking%5C2.png">
+<meta property="og:image" content="https://bbbbbbbin.github.io/2022/06/27/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%80%9D%E7%BB%B4/..%5Cimg%5Cdata_analysis_thinking%5C4.png">
+<meta property="og:image" content="https://bbbbbbbin.github.io/2022/06/27/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%80%9D%E7%BB%B4/..%5Cimg%5Cdata_analysis_thinking%5C3.png">
+<meta property="og:image" content="https://bbbbbbbin.github.io/2022/06/27/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%80%9D%E7%BB%B4/..%5Cimg%5Cdata_analysis_thinking%5C5.png">
+<meta property="og:image" content="https://bbbbbbbin.github.io/2022/06/27/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%80%9D%E7%BB%B4/..%5Cimg%5Cdata_analysis_thinking%5C6.png">
+<meta property="og:image" content="https://bbbbbbbin.github.io/2022/06/27/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%80%9D%E7%BB%B4/..%5Cimg%5Cdata_analysis_thinking%5C7.png">
+<meta property="og:image" content="https://bbbbbbbin.github.io/2022/06/27/img/data_analysis_thinking/8.png">
+<meta property="og:image" content="https://bbbbbbbin.github.io/2022/06/27/img/data_analysis_thinking/9.png">
+<meta property="og:image" content="https://bbbbbbbin.github.io/2022/06/27/img/data_analysis_thinking/10.png">
+<meta property="og:image" content="https://bbbbbbbin.github.io/2022/06/27/img/data_analysis_thinking/11.png">
+<meta property="og:image" content="https://bbbbbbbin.github.io/2022/06/27/img/data_analysis_thinking/12.png">
+<meta property="og:image" content="https://bbbbbbbin.github.io/2022/06/27/img/data_analysis_thinking/13.png">
+<meta property="og:image" content="https://bbbbbbbin.github.io/2022/06/27/img/data_analysis_thinking/14.png">
+<meta property="article:published_time" content="2022-06-27T09:01:05.000Z">
+<meta property="article:modified_time" content="2022-06-27T09:01:05.000Z">
+<meta property="article:author" content="hcb">
+<meta property="article:tag" content="分析思维">
+<meta property="article:tag" content="学习笔记">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://bbbbbbbin.github.io/2022/06/27/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%80%9D%E7%BB%B4/..%5Cimg%5Cdata_analysis_thinking%5C1.png">
+                        
+                                
+                                        
+                                                    <title>
+                                                        数据分析思维学习笔记 - bbbbbbbin&#39;s blog
+                                                    </title>
+
+                                                    <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+                                                        <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"bbbbbbbin.github.io","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+                                                            <script  src="/js/utils.js" ></script>
+                                                                <script  src="/js/color-schema.js" ></script>
+                                                                    
+
+
+                                                                        
+    <meta name="generator" content="Hexo 5.4.2"></head>
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>bbbbbbbin&#39;s blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/data_analysis_thinking/banner.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="数据分析思维学习笔记"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-06-27 17:01" pubdate>
+          2022年6月27日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          4.9k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          41 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">数据分析思维学习笔记</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1BS4y1e7E9">视频</a>（讲师:花木Spring）学习笔记</p>
+<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>数据分析指从大量事物中发现关键信息，用户直接决策，非辅助作用</p>
+<p><img src="..%5Cimg%5Cdata_analysis_thinking%5C1.png" srcset="/img/loading.gif" lazyload alt="分析"></p>
+<h3 id="业务型数据分析"><a href="#业务型数据分析" class="headerlink" title="业务型数据分析"></a>业务型数据分析</h3><h4 id="日-周-月报"><a href="#日-周-月报" class="headerlink" title="日/周/月报"></a>日/周/月报</h4><p>日报：了解业务现状，培养数据敏感性，提供业务发展建议</p>
+<p>周报：短期趋势，更稳定，更具说服力</p>
+<p>月报：周期较长，为后续业务提供更合理发展建</p>
+<h4 id="临时数据提取"><a href="#临时数据提取" class="headerlink" title="临时数据提取"></a>临时数据提取</h4><p>为何需要这个数据，通过这个数据得到什么决策</p>
+<p>针对业务单点问题，追根溯源，及案例分析框架，由点及面解决问题</p>
+<h4 id="常规工作优化"><a href="#常规工作优化" class="headerlink" title="常规工作优化"></a>常规工作优化</h4><p>机器自动化处理，工作优先级排期，遇到困难及时沟通</p>
+<h4 id="专题分析"><a href="#专题分析" class="headerlink" title="专题分析"></a>专题分析</h4><p>需求解读：原始需求-业务了解需求-解析本质需求</p>
+<p>建立逻辑树：分步整合问题，分析问题，拆解问题</p>
+<p>提数分析：组成部分，数量比较，有何变化，各项分布，各项相关性，深层次挖掘</p>
+<p>撰写报告：以图为主，文字为辅，结论前置，逻辑性强，故事感</p>
+<p>融入专项，专项分析，负责kpi，埋点指标体系等</p>
+<p>有目标：紧贴KPI</p>
+<p>有节奏：2-3周输出完整报告</p>
+<p>有闭环：说人话，做人事</p>
+<h4 id="数据异常排查"><a href="#数据异常排查" class="headerlink" title="数据异常排查"></a>数据异常排查</h4><p>原因：</p>
+<pre><code class="hljs">1、数据本身有问题，
+
+2、业务本身有问题
+</code></pre>
+<p>准备：业务理解，指标口径，数据产出过程</p>
+<pre><code class="hljs">判断是否异常
+
+数据准确性
+
+拉长时间轴
+
+指标关联的其他指标
+
+关键人物沟通
+
+最大概率法则分类
+
+假期效应
+
+热点事件
+
+活动影响
+
+政策影响
+
+底层系统故障
+
+统计口径
+
+闭环
+
+持续跟踪数据是否异常
+
+记录沉淀文档化
+
+邮件化，影响范围，主要结论
+</code></pre>
+<h3 id="转型四步"><a href="#转型四步" class="headerlink" title="转型四步"></a>转型四步</h3><h4 id="规划好自己，再评估准备"><a href="#规划好自己，再评估准备" class="headerlink" title="规划好自己，再评估准备"></a>规划好自己，再评估准备</h4><p>业务，研发，算法</p>
+<h4 id="评估自己"><a href="#评估自己" class="headerlink" title="评估自己"></a>评估自己</h4><p>业务</p>
+<p>产品理解能力：数据熟悉度</p>
+<p>分析方法论：AB测试，最大概率法则，二八定律，幸存者偏差</p>
+<p>可视化能力：PPT功底，报告逻辑性，金字塔原理，审美</p>
+<p>演讲能力：表达，讲故事，形象化，大心脏能力</p>
+<p>协作能力：产品、业务、研发沟通软技能</p>
+<p>逻辑思维：过程的全面性和理性价值性</p>
+<p>技术：SQL，模型</p>
+<h4 id="优化自己"><a href="#优化自己" class="headerlink" title="优化自己"></a>优化自己</h4><p>公司业务产品，熟悉核心数据，功能渗透率和关键路径</p>
+<p>思考当前产品问题，如何优化，行业数据，竞品数据</p>
+<p>数据分析方法论，快速从一个较全面、逻辑性、价值性角度分析</p>
+<p><img src="..%5Cimg%5Cdata_analysis_thinking%5C2.png" srcset="/img/loading.gif" lazyload alt="常用方法论"></p>
+<h4 id="寻找对象并实践"><a href="#寻找对象并实践" class="headerlink" title="寻找对象并实践"></a>寻找对象并实践</h4><p>提出问题并思考解决方法</p>
+<h3 id="数据分析流程"><a href="#数据分析流程" class="headerlink" title="数据分析流程"></a>数据分析流程</h3><p>明确问题，搭建框架，数据提取，数据处理，数据分析，数据展现，撰写报告，报告演讲，报告闭环</p>
+<p><img src="..%5Cimg%5Cdata_analysis_thinking%5C4.png" srcset="/img/loading.gif" lazyload alt="分析"></p>
+<h3 id="多元思维模型"><a href="#多元思维模型" class="headerlink" title="多元思维模型"></a>多元思维模型</h3><h4 id="中观能力"><a href="#中观能力" class="headerlink" title="中观能力"></a>中观能力</h4><p>技术理解：数据标准化方法（去除量纲）等</p>
+<p>逻辑性：相关和因果分析等</p>
+<p>价值点：指导性预测性分析等</p>
+<h4 id="微观能力"><a href="#微观能力" class="headerlink" title="微观能力"></a>微观能力</h4><p>想象力，解决问题能力，敏感度高，快速发现提问，高位视角</p>
+<pre><code class="hljs">有效沟通能力：
+
+黄金思维圈法则
+
+准备工作再沟通
+
+快速发散收敛能力：
+
+想法很多，快速找到实际合理想法
+</code></pre>
+<h4 id="宏观能力"><a href="#宏观能力" class="headerlink" title="宏观能力"></a>宏观能力</h4><p>业务与社会热点、行业风口联系，预判，决策</p>
+<h2 id="行业数据分析案例"><a href="#行业数据分析案例" class="headerlink" title="行业数据分析案例"></a>行业数据分析案例</h2><h3 id="电商：京东"><a href="#电商：京东" class="headerlink" title="电商：京东"></a>电商：京东</h3><p>app包含模块：搜索模块，banner模块，分类模块，流模块，推荐模块，底部模块</p>
+<h4 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h4><ol>
+<li>引流（场）总体分析</li>
+<li>漏斗（货）路径分析</li>
+<li>用户（人）痛点分析</li>
+</ol>
+<h4 id="指标"><a href="#指标" class="headerlink" title="指标"></a>指标</h4><p>首页分发效率评估：</p>
+<p>CTR = 点击UV/曝光UV（点击欲望指标）</p>
+<p>人均访问页面数 = 总访问页面数（PV）/ 总访问（UV）</p>
+<h4 id="关系"><a href="#关系" class="headerlink" title="关系"></a>关系</h4><p>负责产品与大盘数据关系：（量化）</p>
+<p>1、给大盘带来了提升</p>
+<p>2、抢大盘流量，产品在涨，大盘在跌</p>
+<p>3、抢大盘流量，对大盘有提升，提升度</p>
+<h4 id="搜索漏斗"><a href="#搜索漏斗" class="headerlink" title="搜索漏斗"></a>搜索漏斗</h4><p><img src="..%5Cimg%5Cdata_analysis_thinking%5C3.png" srcset="/img/loading.gif" lazyload alt="漏斗"></p>
+<h4 id="新用户分析"><a href="#新用户分析" class="headerlink" title="新用户分析"></a>新用户分析</h4><p>衡量拉新效果和拉新优化：</p>
+<p>考虑：</p>
+<pre><code class="hljs">逻辑性
+
+包含内容合理性
+
+文案，设计
+
+个性化
+</code></pre>
+<p>特征：</p>
+<pre><code class="hljs">行为离散，多个漏斗
+
+转化率低
+
+当天不下单
+</code></pre>
+<h3 id="互联网金融：芝麻信用分"><a href="#互联网金融：芝麻信用分" class="headerlink" title="互联网金融：芝麻信用分"></a>互联网金融：芝麻信用分</h3><h4 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h4><p>本质是风控</p>
+<pre><code class="hljs">数据分析师角色：
+
+数据建模师：算法理解
+
+风控分析师：模型理解能力，行业和法律法规经验
+
+产品对象：（央行征信报告
+
+To B：对企业整体信用评估授信
+
+To C：对个人个人信用分
+</code></pre>
+<h4 id="解读"><a href="#解读" class="headerlink" title="解读"></a>解读</h4><ol>
+<li>身份特质：学历，本身特质</li>
+<li>履约能力：消费后按时还款能力，消费兜底性</li>
+<li>信用历史：历史的信用，本身诚信</li>
+<li>人脉关系：好友信用分，个人身分稳定性，弱价值型</li>
+<li>行为偏好：用户当前信息</li>
+</ol>
+<h4 id="数据处理"><a href="#数据处理" class="headerlink" title="数据处理"></a>数据处理</h4><ol>
+<li>缺失性和合理性检验，剔除无效字段（50%）</li>
+<li>数值型字段相关性验证（0.7以上高相关性），同类型数值相关性都高，则选择一种</li>
+<li>字符串字段离散化处：打分法，独热编码</li>
+<li>数据标准化，考虑量级，量纲</li>
+</ol>
+<h4 id="模型评估"><a href="#模型评估" class="headerlink" title="模型评估"></a>模型评估</h4><p>混淆矩阵，ROC曲线</p>
+<p>AUC面积越大越好0.6以上</p>
+<h4 id="调参方法"><a href="#调参方法" class="headerlink" title="调参方法"></a>调参方法</h4><p>子模型引起：</p>
+<pre><code class="hljs">调整该模型参数
+</code></pre>
+<p>所有模型引起</p>
+<pre><code class="hljs">重新数据处理，WOE分组，更换衍生变量，重新打分等
+</code></pre>
+<h3 id="游戏：斗地主"><a href="#游戏：斗地主" class="headerlink" title="游戏：斗地主"></a>游戏：斗地主</h3><h4 id="日常指标"><a href="#日常指标" class="headerlink" title="日常指标"></a>日常指标</h4><ol>
+<li>DAU，WAU，MAU，日活，周活，月活</li>
+<li>留存率（比例），次留、7留、30留</li>
+<li>模块渗透率，模块使用人数/产品日活</li>
+<li>转化率，针对某个连贯路径</li>
+</ol>
+<h4 id="商业化指标"><a href="#商业化指标" class="headerlink" title="商业化指标"></a>商业化指标</h4><ol>
+<li>ARPU：时间段内用户平均收入</li>
+<li>cpm、cpc：广告成本</li>
+<li>ROI：投资回报率</li>
+</ol>
+<h4 id="流失分析"><a href="#流失分析" class="headerlink" title="流失分析"></a>流失分析</h4><p>（行业指标：一个月不使用产品的用户）</p>
+<p>合理定义流失用户</p>
+<pre><code class="hljs">周期用户回流率 = 周期回流用户数/周期流失用户数
+
+回流率趋于收敛，周期定义为流失周期
+</code></pre>
+<p>流失用户最后一步行为分析，查找流失原因</p>
+<p>差异点</p>
+<pre><code class="hljs">结合业务，寻找快感和痛点，或玩家交流
+</code></pre>
+<h4 id="付费分析"><a href="#付费分析" class="headerlink" title="付费分析"></a>付费分析</h4><ol>
+<li>付费金额分布和付费模块</li>
+<li>根据1确定未来重点在高中低哪个群体</li>
+<li>进行AB测试，跟踪数据</li>
+</ol>
+<p>给出结论，根据结论进行优化（直接结论，数据结论，体验结论）</p>
+<h3 id="传统行业"><a href="#传统行业" class="headerlink" title="传统行业"></a>传统行业</h3><p>销售，交易额提升</p>
+<p>需求分析：<br>    核心指标分析</p>
+<pre><code class="hljs">销售额完成率-区域完成率-门店完成率-销售经理完成率-产品&amp;时段
+
+地区竞品销售额
+
+ROI
+
+外部影响持续性评估
+</code></pre>
+<h2 id="数据分析方法"><a href="#数据分析方法" class="headerlink" title="数据分析方法"></a>数据分析方法</h2><h3 id="指标体系建立"><a href="#指标体系建立" class="headerlink" title="指标体系建立"></a>指标体系建立</h3><h4 id="定义及选取原则"><a href="#定义及选取原则" class="headerlink" title="定义及选取原则"></a>定义及选取原则</h4><p>（指标体系建设，宣传以及实施）</p>
+<ol>
+<li>前中后期，指标体系不一样</li>
+<li>分析师牵头业务方协助</li>
+<li>各维度反映业务核心状况，多维度</li>
+<li>大实施框架</li>
+</ol>
+<h4 id="特性"><a href="#特性" class="headerlink" title="特性"></a>特性</h4><ol>
+<li>根本性：核心数据理解到位和准确</li>
+<li>可理解性：指标配上业务解释性，定义等</li>
+<li>结构性：业务充分解读，分细指标</li>
+</ol>
+<h4 id="构成"><a href="#构成" class="headerlink" title="构成"></a>构成</h4><p>派生指标 = 时间段 + 修饰词 +原子性指标</p>
+<h4 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h4><ol>
+<li>理清业务阶段和方向</li>
+<li>确定核心指标（正确性）</li>
+<li>指标核心维度拆解：对核心指标进行公式计算，按照业务路径或业务模块进行拆解</li>
+<li>指标宣贯，存档，落地：<ul>
+<li>当面触达所有相关业务接口人</li>
+<li>对指标口径和业务逻辑进行详细描述存档</li>
+<li>建核心指标相关报表</li>
+</ul>
+</li>
+</ol>
+<h3 id="流量分析"><a href="#流量分析" class="headerlink" title="流量分析"></a>流量分析</h3><p>看数据的过程，指广义的流量，即所有的流量</p>
+<p>如：用户从哪来，经过什么过程，产生什么价值，为何流量波动了</p>
+<p>即：渠道分析，转化分析，价值分析，波动分析</p>
+<h4 id="渠道分析"><a href="#渠道分析" class="headerlink" title="渠道分析"></a>渠道分析</h4><h5 id="渠道来源"><a href="#渠道来源" class="headerlink" title="渠道来源"></a>渠道来源</h5><p><img src="..%5Cimg%5Cdata_analysis_thinking%5C5.png" srcset="/img/loading.gif" lazyload alt="渠道来源"></p>
+<h5 id="渠道衡量"><a href="#渠道衡量" class="headerlink" title="渠道衡量"></a>渠道衡量</h5><p><img src="..%5Cimg%5Cdata_analysis_thinking%5C6.png" srcset="/img/loading.gif" lazyload alt="渠道衡量"></p>
+<h5 id="关键指标"><a href="#关键指标" class="headerlink" title="关键指标"></a>关键指标</h5><p>前期看有效用户数和次留，中期看次留、7日、30日，后期看ROI</p>
+<p>避免刷量嫌疑，需要看有主动行为的用户数</p>
+<h5 id="分析方法"><a href="#分析方法" class="headerlink" title="分析方法"></a>分析方法</h5><ul>
+<li>结构分析：先按一级渠道拆解，再按二级渠道拆解</li>
+<li>趋势分析：看每个渠道变化趋势，量级和留存</li>
+<li>对比分析：不同渠道间趋势对比</li>
+<li>作弊分析：用户行为和机器学习</li>
+</ul>
+<h4 id="转化和价值分析"><a href="#转化和价值分析" class="headerlink" title="转化和价值分析"></a>转化和价值分析</h4><h5 id="漏斗分析法"><a href="#漏斗分析法" class="headerlink" title="漏斗分析法"></a>漏斗分析法</h5><ul>
+<li>基础属性：手机品牌，地域，IMEI等用户画像</li>
+<li>行为属性：入口，时段，用户活跃度，用户标签</li>
+</ul>
+<h5 id="功能模块分析"><a href="#功能模块分析" class="headerlink" title="功能模块分析"></a>功能模块分析</h5><ul>
+<li>功能渗透率：功能用户数/大盘用户数</li>
+<li>功能留存率：第一天使用功能第二天也使用功能用户数/第一天使用功能用户数</li>
+<li>功能大盘留存率：第一天使用功能第二天也使用功能用户数/第一天大盘用户数</li>
+</ul>
+<h5 id="价值分析"><a href="#价值分析" class="headerlink" title="价值分析"></a>价值分析</h5><ul>
+<li>功能核心用户数：符合某种要求的功能用户数<ul>
+<li>（使用次数，使用时长，使用天数，某种行为）</li>
+</ul>
+</li>
+<li>功能对大盘贡献：如，对大盘留存提升的贡献<ul>
+<li>功能A对大盘留存的提升贡献=功能A渗透率 * 功能A大盘留存提升数</li>
+</ul>
+</li>
+<li>功能带来收入对比</li>
+</ul>
+<h4 id="波动分析"><a href="#波动分析" class="headerlink" title="波动分析"></a>波动分析</h4><h5 id="日活波动"><a href="#日活波动" class="headerlink" title="日活波动"></a>日活波动</h5><ul>
+<li>外部：行业变化，竞品变化</li>
+<li>内部：数据统计问题，用户基础属性，用户行为属性</li>
+</ul>
+<h5 id="留存"><a href="#留存" class="headerlink" title="留存"></a>留存</h5><ul>
+<li>新用户：与渠道和渠道过程有关</li>
+<li>老用户：核心功能用户留存，非核心非功能用户留存</li>
+</ul>
+<h3 id="路径分析"><a href="#路径分析" class="headerlink" title="路径分析"></a>路径分析</h3><p>（排查异常，提出问题）</p>
+<p>在用户所有操作行为中发现产品设计初可能不知道、但非常有意思的用户前后行为—-路径分析</p>
+<p>（基于数据本身发现的，产品可能不清楚，但是复合用户习惯的路径）（先有数据再验证假设）</p>
+<p>与漏斗分析的区别：漏斗分析认为设定一条或若干条漏斗（先有假设再数据验证）</p>
+<p>日志：路径分析基于底层日志，记录了用户最详细的行为信息</p>
+<pre><code class="hljs">筛选，关联，标准化及画图，启发
+</code></pre>
+<p><img src="..%5Cimg%5Cdata_analysis_thinking%5C7.png" srcset="/img/loading.gif" lazyload alt="日志"></p>
+<p>路径分析都是以功能点的时序整体分析为主，只有指标没有维度，精细化运营必须进行维度拆分</p>
+<h3 id="竞品分析"><a href="#竞品分析" class="headerlink" title="竞品分析"></a>竞品分析</h3><ul>
+<li><p>产品准备进入行业，先行业内竞品分析清楚，侧重行业规模和前景的分析</p>
+</li>
+<li><p>产品处于下降阶段，看竞争对手在做什么，侧重头部玩家的玩法分析</p>
+</li>
+<li><p>产品处于瓶颈阶段，看竞争对手的数据和功能迭代，持续监控对手数据，找突破</p>
+</li>
+<li><p>产品处于快速上升，一般不做竞品分析</p>
+</li>
+<li><p>确定分析的目的</p>
+<ul>
+<li>尝试进入新行业，评估可行性：偏行业趋势，市场规模，财务收入</li>
+<li>看竞品功能、玩法和数据，学习优点：功能体验，运营手法，具体数据，落地性强</li>
+<li>看竞品迭代的功能、玩法和数据，揣摩竞品做法，预防：版本迭代，战略重心，管理层需要</li>
+</ul>
+</li>
+<li><p>挑选竞品，对比分析：挑选，进行对比运营手法分析，看宏观微观数据</p>
+</li>
+<li><p>给初步分析结论：</p>
+</li>
+</ul>
+<h3 id="营销活动分析"><a href="#营销活动分析" class="headerlink" title="营销活动分析"></a>营销活动分析</h3><ul>
+<li>分析连贯性：前中后期都要分析</li>
+<li>分析对比性：活动与活动之间对比</li>
+<li>分析公正性：评判有一套商定好的标准</li>
+</ul>
+<h4 id="前期"><a href="#前期" class="headerlink" title="前期"></a>前期</h4><p>与运营方多沟通，了解活动整体情况：5w2h</p>
+<ul>
+<li>商定活动目标</li>
+<li>沟通数据埋点</li>
+<li>提前搭建指标体系和报表<ul>
+<li>找到关键指标，按照基础属性和行为属性拆解</li>
+</ul>
+</li>
+<li>定好输出格式</li>
+</ul>
+<h4 id="中期"><a href="#中期" class="headerlink" title="中期"></a>中期</h4><p>观察数据</p>
+<ul>
+<li>第一天数据很关键<ul>
+<li>指标体系报表数据是否异常</li>
+</ul>
+</li>
+<li>一到三天数据<ul>
+<li>预估活动目标的完成度，是否需要调整</li>
+</ul>
+</li>
+<li>定期输出活动战报，让所有人了解情况</li>
+<li>一周后数据复盘<ul>
+<li>同步管理层</li>
+</ul>
+</li>
+</ul>
+<h4 id="后期"><a href="#后期" class="headerlink" title="后期"></a>后期</h4><p>报表建设，公正性</p>
+<ul>
+<li>对大盘影响，同比，环比</li>
+<li>短期效果</li>
+<li>长期效果</li>
+<li>存在问题及优化</li>
+</ul>
+<p>了解活动本质和意义，从这方面入手阐述贡献</p>
+<h3 id="用户增长"><a href="#用户增长" class="headerlink" title="用户增长"></a>用户增长</h3><ul>
+<li>（拉新角度）AARRR —-获取-激活-留存-变现-推荐</li>
+<li>（留存角度）留存-变现-推荐-拉新-激活</li>
+<li>（变现角度）变现-推荐-拉新-激活-留存</li>
+</ul>
+<h4 id="难落地思维"><a href="#难落地思维" class="headerlink" title="难落地思维"></a>难落地思维</h4><ul>
+<li>魔法数字（用户主动行为）</li>
+<li>优化渠道结构</li>
+<li>流失召回</li>
+</ul>
+<h4 id="增长思维"><a href="#增长思维" class="headerlink" title="增长思维"></a>增长思维</h4><ul>
+<li>北极星指标：找到最核心的指标<ul>
+<li>找对指标后进行拆解</li>
+<li>拆解后指标与每个团队进行KPI挂钩</li>
+</ul>
+</li>
+<li>AB测试：公正性和快速反馈性<ul>
+<li>原则：基于数据分析，要看结果数据和过程数据，排坑第一步</li>
+</ul>
+</li>
+</ul>
+<p><img src="../img/data_analysis_thinking/8.png" srcset="/img/loading.gif" lazyload alt="书"><br><img src="../img/data_analysis_thinking/9.png" srcset="/img/loading.gif" lazyload alt="推荐文章"><br><img src="../img/data_analysis_thinking/10.png" srcset="/img/loading.gif" lazyload alt="漏斗"><br>通过漏斗模型发现引导问题<br>身份证和押金前后顺序是产品设计层面，本质是AB测试<br>转化率漏斗很长，要做各种维度拆解<br><img src="../img/data_analysis_thinking/11.png" srcset="/img/loading.gif" lazyload alt="11"><br><img src="../img/data_analysis_thinking/12.png" srcset="/img/loading.gif" lazyload alt="12"><br><img src="../img/data_analysis_thinking/13.png" srcset="/img/loading.gif" lazyload alt="13"></p>
+<h4 id="锻炼方法"><a href="#锻炼方法" class="headerlink" title="锻炼方法"></a>锻炼方法</h4><ul>
+<li>独立思考和辩证性思维</li>
+<li>多研究用户数据</li>
+<li>学习他人优点</li>
+<li>所有分析增长都要靠产品、运营闭环</li>
+<li>成体系才是可传播、可继承</li>
+</ul>
+<h3 id="问题的定义"><a href="#问题的定义" class="headerlink" title="问题的定义"></a>问题的定义</h3><p>先分享：分享给别人，别人有不一样的理解、疑问、质疑和新想法，增强自身的认知程度<br>再使用：结合自身实际情况进行使用</p>
+<p>提了很多需求，问题是否找到<br>问题拆到第几层，拆解深度是否足够<br>问题拆解到最后一层，执行是否有问题</p>
+<h4 id="问题识别"><a href="#问题识别" class="headerlink" title="问题识别"></a>问题识别</h4><p>二八定理，找出主要问题</p>
+<ul>
+<li>列出所有问题，头脑风暴</li>
+<li>最大概率法则测试（是否解决一个问题，其它问题迎刃而解</li>
+<li>遇到困恼请教别人</li>
+</ul>
+<h4 id="问题拆解"><a href="#问题拆解" class="headerlink" title="问题拆解"></a>问题拆解</h4><ol>
+<li>按照自己理解进行拆解，想到多少是多少</li>
+<li>就自己的拆解与业务方熟悉业务的人进行沟通</li>
+<li>修改第一步，请教leader</li>
+<li>再改一次，汇报业务方leader</li>
+</ol>
+<h3 id="SQL数据获取"><a href="#SQL数据获取" class="headerlink" title="SQL数据获取"></a>SQL数据获取</h3><p>前期</p>
+<ul>
+<li>了解业务方和研发说的哪份表和日志</li>
+<li>了解表和日志筛选条件，为什么</li>
+<li>了解表和日志有什么问题，例：是否缺失某天数据</li>
+<li>验证现在是否存在问题，测试跑数据</li>
+</ul>
+<h3 id="报告撰写"><a href="#报告撰写" class="headerlink" title="报告撰写"></a>报告撰写</h3><p>（多看优秀报告，获得别人反馈</p>
+<h4 id="原则"><a href="#原则" class="headerlink" title="原则"></a>原则</h4><ul>
+<li>主题一脉相承</li>
+<li>通俗简单易懂</li>
+<li>结论闭环先行<ul>
+<li>基于什么数据</li>
+<li>发现什么结论</li>
+<li>基于这个结论的建议</li>
+<li>基于这个建议的产品落地项</li>
+</ul>
+</li>
+</ul>
+<h4 id="组成部分"><a href="#组成部分" class="headerlink" title="组成部分"></a>组成部分</h4><ul>
+<li>背景：为何做，即问题识别</li>
+<li>分析结论：面向管理层</li>
+<li>分析狂阶：问题拆解</li>
+<li>第一个关键点结论</li>
+<li>第一个关键支撑数据</li>
+<li>。。。</li>
+<li>整体结论：再汇总一次结论</li>
+<li>落地项：产品落地，具体到时间人预期效果</li>
+</ul>
+<h3 id="AB测试"><a href="#AB测试" class="headerlink" title="AB测试"></a>AB测试</h3><h4 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h4><ul>
+<li>根据数据分析得到某建议项</li>
+<li>根据建议项对落地进行AB测试</li>
+<li>根据落地项，研发开发设计</li>
+<li>数据采集</li>
+<li>跟进AB测试效果，显著性95%以上</li>
+</ul>
+<p>灰度按照5%，10%，20%，50%，100%控制</p>
+<h4 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h4><ul>
+<li>AB两组是否真相同（尽可能一个变量不同</li>
+<li>验证策略是否生效</li>
+<li>AB测试评估指标体系（综合性指标体系</li>
+<li>多观察几天数据</li>
+</ul>
+<p>AB测试存档规划（5W2H，预期和实际效果</p>
+<h3 id="行业分析"><a href="#行业分析" class="headerlink" title="行业分析"></a>行业分析</h3><p>（转型）公司准备进入某行业，给出详细报告</p>
+<p>（用户需求）公司业务发展遇到瓶颈，验证当前市场对产品需求有无变化</p>
+<p>分析目标：（找出颠覆者，行业空档，行业本质</p>
+<ul>
+<li>界定范围—-全局视野下找切入点</li>
+<li>市场规模</li>
+<li>社会热点事件—–相关事件</li>
+<li>头部玩家</li>
+<li>未来预测</li>
+</ul>
+<p>节奏：一周快速出一些报告，与需求方沟通，把不确定点剔除，明确点确定，然后深挖</p>
+<h3 id="用户研究"><a href="#用户研究" class="headerlink" title="用户研究"></a>用户研究</h3><p>满足用户什么要求？<br>反馈最多的问题是什么？哪些可以重点解决？</p>
+<p>进行线上或线下调研，数据反馈</p>
+<ul>
+<li>前期：用户需求情况，基础画像情况，</li>
+<li>中期：用户行为习惯</li>
+<li>后期：用户反馈点，竞品使用情况</li>
+</ul>
+<p>步骤关键点：</p>
+<ul>
+<li>研究目的：背景，具体问题</li>
+<li>研究方法：定量，定性</li>
+<li>研究结论：精而快</li>
+</ul>
+<p><img src="../img/data_analysis_thinking/14.png" srcset="/img/loading.gif" lazyload alt="用户研究"></p>
+<h2 id="个人提升"><a href="#个人提升" class="headerlink" title="个人提升"></a>个人提升</h2><h3 id="时间管理"><a href="#时间管理" class="headerlink" title="时间管理"></a>时间管理</h3><h4 id="方法论"><a href="#方法论" class="headerlink" title="方法论"></a>方法论</h4><p>二八原则：优先级<br>以人为本：状态好做重要事情<br>刻意练习：效果反馈和反思<br>可控压力：更高效更聪明</p>
+<h4 id="关键点"><a href="#关键点" class="headerlink" title="关键点"></a>关键点</h4><p>早起<br>阶段性熬夜<br>上下班时间<br>会议时间<br>周六日</p>
+<p><strong>不是工作辛苦，而是越来越懒</strong><br><strong>兴趣是伪命题，工匠精神才是源动力</strong></p>
+<h3 id="职场提升"><a href="#职场提升" class="headerlink" title="职场提升"></a>职场提升</h3><p><strong>关键点</strong><br>不纠结于形式（案例），注重内容（思维）</p>
+<p><strong>思考 * 表达 * 执行上超出预期</strong><br>敏捷思考能力<br>良好表达能力<br>执行力上高效</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/" class="category-chain-item">数据分析</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E5%88%86%E6%9E%90%E6%80%9D%E7%BB%B4/">#分析思维</a>
+      
+        <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">#学习笔记</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>数据分析思维学习笔记</div>
+      <div>https://bbbbbbbin.github.io/2022/06/27/数据分析思维/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>hcb</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年6月27日</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">
+              <span class="hint--top hint--rounded" aria-label="SA - 相同方式共享">
+                <i class="iconfont icon-sa"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/06/22/BOSS%E7%9B%B4%E8%81%98/" title="BOSS直聘数据可视化">
+                        <span class="hidden-mobile">BOSS直聘数据可视化</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
