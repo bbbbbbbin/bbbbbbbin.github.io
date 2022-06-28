@@ -1,0 +1,681 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/echarts@4.8.0/dist/echarts.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/echarts-gl@1.1.1/dist/echarts-gl.min.js"></script>
+
+    <script type="text/javascript" src="https://assets.pyecharts.org/assets/echarts-wordcloud.min.js"></script>
+
+
+    <head>
+        <meta charset="UTF-8">
+        <link rel="apple-touch-icon" sizes="76x76" href="/img/icon.jpg">
+        <link rel="icon" href="/img/icon.jpg">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        
+                <meta name="theme-color" content="#2f4154">
+                <meta name="author" content="hcb">
+                <meta name="keywords" content="">
+                
+                    <meta name="description" content="拉勾网指定岗位指定城市的各项数据">
+<meta property="og:type" content="article">
+<meta property="og:title" content="lagou_crawler">
+<meta property="og:url" content="https://bbbbbbbin.github.io/2022/06/28/lagou-crawler/index.html">
+<meta property="og:site_name" content="bbbbbbbin&#39;s blog">
+<meta property="og:description" content="拉勾网指定岗位指定城市的各项数据">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://bbbbbbbin.github.io/img/lagou_crawler/1.png">
+<meta property="og:image" content="https://bbbbbbbin.github.io/img/lagou_crawler/2.png">
+<meta property="og:image" content="https://bbbbbbbin.github.io/img/lagou_crawler/4.png">
+<meta property="og:image" content="https://bbbbbbbin.github.io/img/lagou_crawler/3.png">
+<meta property="article:published_time" content="2022-06-28T03:14:50.000Z">
+<meta property="article:modified_time" content="2022-06-28T03:14:50.000Z">
+<meta property="article:author" content="hcb">
+<meta property="article:tag" content="selenium">
+<meta property="article:tag" content="beautifulsoup">
+<meta property="article:tag" content="re">
+<meta property="article:tag" content="拉勾网">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://bbbbbbbin.github.io/img/lagou_crawler/1.png">
+                        
+                                
+                                        
+                                                    <title>
+                                                        lagou_crawler - bbbbbbbin&#39;s blog
+                                                    </title>
+
+                                                    <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+                                                        <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"bbbbbbbin.github.io","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+                                                            <script  src="/js/utils.js" ></script>
+                                                                <script  src="/js/color-schema.js" ></script>
+                                                                    
+
+
+                                                                        
+    <meta name="generator" content="Hexo 5.4.2"></head>
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>bbbbbbbin&#39;s blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/lagou_crawler/banner.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="lagou_crawler"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-06-28 11:14" pubdate>
+          2022年6月28日 上午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          5.6k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          47 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">lagou_crawler</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="本文以广州的数据分析的岗位为例进行数据爬取"><a href="#本文以广州的数据分析的岗位为例进行数据爬取" class="headerlink" title="本文以广州的数据分析的岗位为例进行数据爬取"></a>本文以广州的数据分析的岗位为例进行数据爬取</h2><p>主要想从事这方面的工作，同时加强自身的爬虫能力</p>
+<h3 id="用到的模块"><a href="#用到的模块" class="headerlink" title="用到的模块"></a>用到的模块</h3><ul>
+<li><strong>selenium</strong></li>
+<li><strong>beautifulsoup</strong></li>
+<li><strong>re</strong></li>
+</ul>
+<h3 id="观察网址以及页面"><a href="#观察网址以及页面" class="headerlink" title="观察网址以及页面"></a>观察网址以及页面</h3><p><a target="_blank" rel="noopener" href="https://www.lagou.com/wn/jobs?kd=%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90&amp;city=%E5%B9%BF%E5%B7%9E&amp;pn=1">https://www.lagou.com/wn/jobs?kd=%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90&amp;city=%E5%B9%BF%E5%B7%9E&amp;pn=1</a></p>
+<p>可以看到网页变量主要是三个，<strong>kd=数据分析，city=广州，pn=1</strong>，第一第二个变量分别代表职位关键词和城市，第三个变量代表页数</p>
+<p>进入网址，F12查看页面信息，可以看到每一个职位信息存放在 <strong>job-list</strong> 下每一个 <strong>item_*</strong> 中，*代表这一串字符串网页可能后期会改变，其中该模块里包含了 <strong>item_top_*</strong> 以及 <strong>item_bottom_*</strong> 模块，其中top包含了职位和公司的基本信息，而bottom则包含了一些补充信息，职位信息关键词，以及公司福利关键词<br><img src="/img/lagou_crawler/1.png" srcset="/img/loading.gif" lazyload alt="页面信息"></p>
+<p>除此之外，当我们将鼠标移动到职位名称的模块上时，会出现一个悬浮框，包含了该职位的一些更为详细的信息，为获取更多信息，尝试将此信息也一并爬取下来。<br>悬浮框是一个叫 <strong>job_detail_*</strong> 的模块，包含了 <strong>model_title_*</strong> 以及 <strong>job_description_*</strong> 模块，第一个包含了职位信息，会比top中的职位信息更详细一些，第二个模块包含了职位描述，以及工作具体的地点。<br>（注：不难发现，此悬浮框信息是不包含在原本的页面里的，只有鼠标悬浮后，信息才会出现在页面中，可以对浏览器进行鼠标模拟操作直接获取信息。）<br><img src="/img/lagou_crawler/2.png" srcset="/img/loading.gif" lazyload alt="页面信息悬浮框"></p>
+<h3 id="获取页面信息"><a href="#获取页面信息" class="headerlink" title="获取页面信息"></a>获取页面信息</h3><p>普通的页面信息可以直接通过selenium模拟浏览器获取</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs python">job,city = <span class="hljs-string">&#x27;数据分析&#x27;</span>,<span class="hljs-string">&#x27;厦门&#x27;</span><br>url = <span class="hljs-string">&#x27;https://www.lagou.com/wn/jobs?kd=&#123;0&#125;&amp;city=&#123;1&#125;&amp;pn=1&#x27;</span>.<span class="hljs-built_in">format</span>(urllib.parse.quote(job),urllib.parse.quote(city))<br>options = webdriver.ChromeOptions()<br>browser = webdriver.Chrome(<span class="hljs-string">&#x27;crawler/chromedriver.exe&#x27;</span>,options=options)<br>html = browser.find_element(By.ID, <span class="hljs-string">&#x27;jobList&#x27;</span>)   <span class="hljs-comment"># 直接获取joblist下的信息</span><br>html = html.get_attribute(<span class="hljs-string">&#x27;innerHTML&#x27;</span>)<br>soup = BeautifulSoup(html, <span class="hljs-string">&quot;html.parser&quot;</span>)<br></code></pre></td></tr></table></figure>
+
+<p>获取悬浮框的信息则需要通过selenium模拟鼠标操作循环的对每一个职位title进行悬浮才可以获取得到</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 模拟鼠标悬浮代码</span><br><span class="hljs-comment"># 通过find_element和Xpath路径找到在职位title所在的位置</span><br><span class="hljs-keyword">try</span>:<br>    mouse1 = browser.find_element(By.XPATH, <span class="hljs-string">&#x27;//*[@id=&quot;jobList&quot;]/div[1]/div[1]/div[1]/div[1]/div[1]/a&#x27;</span>)<br><span class="hljs-keyword">except</span>:<br>    <span class="hljs-keyword">continue</span><br><span class="hljs-comment"># 鼠标模拟悬浮到指定的位置</span><br>ActionChains(browser).move_to_element(mouse1).perform()<br><span class="hljs-comment"># 给网页缓冲时间</span><br>time.sleep(<span class="hljs-number">0.5</span>)<br><span class="hljs-comment"># 页面解析</span><br>h = browser.find_element(By.ID, <span class="hljs-string">&#x27;jobList&#x27;</span>)<br>h = h.get_attribute(<span class="hljs-string">&#x27;innerHTML&#x27;</span>)<br>s = BeautifulSoup(h, <span class="hljs-string">&quot;html.parser&quot;</span>)<br><span class="hljs-comment"># 获取 job_detail 下的信息</span><br>f = s(class_ = re.<span class="hljs-built_in">compile</span>(<span class="hljs-string">&#x27;^job_detail&#x27;</span>))<br></code></pre></td></tr></table></figure>
+
+<h3 id="解析页面信息"><a href="#解析页面信息" class="headerlink" title="解析页面信息"></a>解析页面信息</h3><h4 id="原本页面信息"><a href="#原本页面信息" class="headerlink" title="原本页面信息"></a>原本页面信息</h4><p>从原本的页面信息包含的信息有</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs python">lists_top = soup(class_ = re.<span class="hljs-built_in">compile</span>(<span class="hljs-string">&#x27;^item-top&#x27;</span>))<br>lists_bottom = soup(class_ = re.<span class="hljs-built_in">compile</span>(<span class="hljs-string">&#x27;^item-bom&#x27;</span>))<br><span class="hljs-keyword">for</span> i,j <span class="hljs-keyword">in</span> <span class="hljs-built_in">zip</span>(lists_top,lists_bottom):<br>    <span class="hljs-comment"># 对item-top_* 的信息进行提取</span><br>    <span class="hljs-comment"># 运用正则将 [] 里的地点信息提取出来</span><br>    p = re.<span class="hljs-built_in">compile</span>(<span class="hljs-string">r&#x27;\[(?P&lt;area&gt;.*?)\]&#x27;</span>)<br>    jobs[num][<span class="hljs-string">&#x27;地区&#x27;</span>] = p.search(<span class="hljs-built_in">str</span>(i.select(<span class="hljs-string">&#x27;a&#x27;</span>)[<span class="hljs-number">0</span>])).group(<span class="hljs-string">&#x27;area&#x27;</span>)<br>    <span class="hljs-comment"># company_name_* 包含了公司名字</span><br>    jobs[num][<span class="hljs-string">&#x27;公司名字&#x27;</span>] = i(class_ = re.<span class="hljs-built_in">compile</span>(<span class="hljs-string">&#x27;^company-name&#x27;</span>))[<span class="hljs-number">0</span>].text<br>    <span class="hljs-comment"># industry_* 包含了公司的情况，发现有一些公司会存在没有该div的情况，因此做一个判断</span><br>    <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(i(class_ = re.<span class="hljs-built_in">compile</span>(<span class="hljs-string">&#x27;^industry&#x27;</span>))) == <span class="hljs-number">0</span>:<br>        jobs[num][<span class="hljs-string">&#x27;公司情况&#x27;</span>] = <span class="hljs-literal">None</span><br>    <span class="hljs-keyword">else</span>:<br>        jobs[num][<span class="hljs-string">&#x27;公司情况&#x27;</span>] = i(class_ = re.<span class="hljs-built_in">compile</span>(<span class="hljs-string">&#x27;^industry&#x27;</span>))[<span class="hljs-number">0</span>].text<br><br>    <span class="hljs-comment"># 对item-bom_* 的信息进行提取</span><br>    <span class="hljs-comment"># 每一个职位标签包含在第一个div下的每一个span中，将其存入数组</span><br>    jobs[num][<span class="hljs-string">&#x27;职位标签&#x27;</span>] = []<br>    <span class="hljs-keyword">for</span> k <span class="hljs-keyword">in</span> j.select(<span class="hljs-string">&#x27;div&#x27;</span>)[<span class="hljs-number">0</span>].select(<span class="hljs-string">&#x27;span&#x27;</span>):<br>        jobs[num][<span class="hljs-string">&#x27;职位标签&#x27;</span>].append(k.text)<br>    <span class="hljs-comment"># 公司标签位于第二个div中</span><br>    jobs[num][<span class="hljs-string">&#x27;公司标签&#x27;</span>] = j.select(<span class="hljs-string">&#x27;div&#x27;</span>)[<span class="hljs-number">1</span>].text<br></code></pre></td></tr></table></figure>
+
+<p><img src="/img/lagou_crawler/4.png" srcset="/img/loading.gif" lazyload alt="原本页面信息"></p>
+<h4 id="悬浮框信息"><a href="#悬浮框信息" class="headerlink" title="悬浮框信息"></a>悬浮框信息</h4><p>从悬浮框可以获得的信息有</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># modal_title_text_* 下面每一个span标签包含了不同信息</span><br>jobs[num][<span class="hljs-string">&#x27;工作标题&#x27;</span>] = f[<span class="hljs-number">0</span>](class_ = re.<span class="hljs-built_in">compile</span>(<span class="hljs-string">&#x27;^modal_title_text&#x27;</span>))[<span class="hljs-number">0</span>].select(<span class="hljs-string">&#x27;span&#x27;</span>)[<span class="hljs-number">0</span>].text<br>jobs[num][<span class="hljs-string">&#x27;薪资&#x27;</span>] = f[<span class="hljs-number">0</span>](class_ = re.<span class="hljs-built_in">compile</span>(<span class="hljs-string">&#x27;^modal_title_text&#x27;</span>))[<span class="hljs-number">0</span>].select(<span class="hljs-string">&#x27;span&#x27;</span>)[<span class="hljs-number">1</span>].text<br><span class="hljs-comment"># modal_title_discription_* 下面每一个span标签包含了不同信息</span><br>jobs[num][<span class="hljs-string">&#x27;城市&#x27;</span>] = f[<span class="hljs-number">0</span>](class_ = re.<span class="hljs-built_in">compile</span>(<span class="hljs-string">&#x27;^modal_title_discription&#x27;</span>))[<span class="hljs-number">0</span>].select(<span class="hljs-string">&#x27;span&#x27;</span>)[<span class="hljs-number">0</span>].text<br>jobs[num][<span class="hljs-string">&#x27;年限&#x27;</span>] = f[<span class="hljs-number">0</span>](class_ = re.<span class="hljs-built_in">compile</span>(<span class="hljs-string">&#x27;^modal_title_discription&#x27;</span>))[<span class="hljs-number">0</span>].select(<span class="hljs-string">&#x27;span&#x27;</span>)[<span class="hljs-number">1</span>].text<br>jobs[num][<span class="hljs-string">&#x27;学历&#x27;</span>] = f[<span class="hljs-number">0</span>](class_ = re.<span class="hljs-built_in">compile</span>(<span class="hljs-string">&#x27;^modal_title_discription&#x27;</span>))[<span class="hljs-number">0</span>].select(<span class="hljs-string">&#x27;span&#x27;</span>)[<span class="hljs-number">2</span>].text<br>jobs[num][<span class="hljs-string">&#x27;职限&#x27;</span>] = f[<span class="hljs-number">0</span>](class_ = re.<span class="hljs-built_in">compile</span>(<span class="hljs-string">&#x27;^modal_title_discription&#x27;</span>))[<span class="hljs-number">0</span>].select(<span class="hljs-string">&#x27;span&#x27;</span>)[<span class="hljs-number">3</span>].text<br><span class="hljs-comment"># modal_title_discription_* 下面每一个 job_info_* 标签包含了不同信息</span><br>jobs[num][<span class="hljs-string">&#x27;职位详情&#x27;</span>] = f[<span class="hljs-number">0</span>](class_ = re.<span class="hljs-built_in">compile</span>(<span class="hljs-string">&#x27;^job_discription&#x27;</span>))[<span class="hljs-number">0</span>](class_ = re.<span class="hljs-built_in">compile</span>(<span class="hljs-string">&#x27;^job_info&#x27;</span>))[<span class="hljs-number">0</span>].text<br>jobs[num][<span class="hljs-string">&#x27;具体地点&#x27;</span>] = f[<span class="hljs-number">0</span>](class_ = re.<span class="hljs-built_in">compile</span>(<span class="hljs-string">&#x27;^job_discription&#x27;</span>))[<span class="hljs-number">0</span>](class_ = re.<span class="hljs-built_in">compile</span>(<span class="hljs-string">&#x27;^job_info&#x27;</span>))[<span class="hljs-number">1</span>].text<br></code></pre></td></tr></table></figure>
+
+<p><img src="/img/lagou_crawler/3.png" srcset="/img/loading.gif" lazyload alt="悬浮框信息"></p>
+<h4 id="循环获取所有的悬浮框信息"><a href="#循环获取所有的悬浮框信息" class="headerlink" title="循环获取所有的悬浮框信息"></a>循环获取所有的悬浮框信息</h4><p>悬浮框数量与lists_top和lists_bottom的长度相同<br>因此在循环里面要加入模拟鼠标悬浮的代码，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs python">a = <span class="hljs-number">1</span><br><span class="hljs-comment"># 保证页面滑轮处于最上面</span><br>browser.execute_script(<span class="hljs-string">&quot;window.scrollTo(0,0)&quot;</span>)<br><span class="hljs-keyword">for</span> i,j <span class="hljs-keyword">in</span> <span class="hljs-built_in">zip</span>(lists_top,lists_bottom):<br>    <span class="hljs-comment"># 使用a变量，代表悬浮在第a个职位标题a标签，获取该悬浮框信息</span><br>    <span class="hljs-keyword">try</span>:<br>        mouse1 = browser.find_element(By.XPATH, <span class="hljs-string">&#x27;//*[@id=&quot;jobList&quot;]/div[1]/div[&#123;0&#125;]/div[1]/div[1]/div[1]/a&#x27;</span>.<span class="hljs-built_in">format</span>(a))<br>    <span class="hljs-keyword">except</span>:<br>        <span class="hljs-keyword">continue</span><br>    ActionChains(browser).move_to_element(mouse1).perform()<br>    time.sleep(<span class="hljs-number">0.5</span>)<br>    h = browser.find_element(By.ID, <span class="hljs-string">&#x27;jobList&#x27;</span>)<br>    h = h.get_attribute(<span class="hljs-string">&#x27;innerHTML&#x27;</span>)<br>    s = BeautifulSoup(h, <span class="hljs-string">&quot;html.parser&quot;</span>)<br>    f = s(class_ = re.<span class="hljs-built_in">compile</span>(<span class="hljs-string">&#x27;^job_detail&#x27;</span>))<br>    <span class="hljs-comment"># 在获取完悬浮框信息后，将页面下滑一点，保证下一次能够正确的获取悬浮框，否则容易导致悬浮框信息获取失败</span><br>    browser.execute_script(<span class="hljs-string">&quot;window.scrollTo(0,&#123;&#125;)&quot;</span>.<span class="hljs-built_in">format</span>(a*<span class="hljs-number">80</span>))<br>    a += <span class="hljs-number">1</span><br></code></pre></td></tr></table></figure>
+
+<h4 id="模拟页面点击下一页"><a href="#模拟页面点击下一页" class="headerlink" title="模拟页面点击下一页"></a>模拟页面点击下一页</h4><p>爬取过程发现，要是通过网址上的 pn 变量标签重新获取网页，不仅速度比较慢，而且容易激发平台反爬机制，需要登陆后才能进行操作<br>因此，通过页面发现，存在“下一页”该按钮，通过selenium模拟点击下一页，从而直接循环获取所有页的所有信息</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 定义一个字典储存职位信息</span><br>jobs = &#123;&#125;<br><span class="hljs-comment"># 通过 lg-pagination-item_* 标签获取到最大页数</span><br>pages = <span class="hljs-built_in">len</span>(soup(class_ = re.<span class="hljs-built_in">compile</span>(<span class="hljs-string">&#x27;^lg-pagination-item&#x27;</span>)))<br><span class="hljs-comment"># 从第一页开始获取</span><br>b = <span class="hljs-number">1</span><br><span class="hljs-comment"># 当b小于等于最大页数，循环</span><br><span class="hljs-keyword">while</span>(b &lt;= pages):<br>    <span class="hljs-comment"># num代表储存了职位信息的数量，每次获取一个职位信息，要将num+1，才能将所有页的职位信息存储在一个jobs字典里</span><br>    num = <span class="hljs-built_in">len</span>(jobs)<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;获取第&#123;&#125;页信息&#x27;</span>.<span class="hljs-built_in">format</span>(b))<br>    <span class="hljs-comment"># 。。。此处是以上述的获取信息的循环代码，最后 num 要 +1</span><br>    <span class="hljs-comment"># 获取完该页信息后，将 b+1 </span><br>    b+=<span class="hljs-number">1</span><br>    <span class="hljs-comment"># 点击下一页</span><br>    <span class="hljs-keyword">try</span>:<br>    <span class="hljs-comment"># 通过 find_element 找到下一页按钮的元素    </span><br>    <span class="hljs-comment"># 通过 click 函数点击该元素</span><br>        browser.find_element(By.CLASS_NAME, <span class="hljs-string">&#x27;lg-pagination-next&#x27;</span>).click()<br>    <span class="hljs-keyword">except</span>:<br>        <span class="hljs-keyword">continue</span><br></code></pre></td></tr></table></figure>
+
+<h4 id="写入数据后退出浏览器"><a href="#写入数据后退出浏览器" class="headerlink" title="写入数据后退出浏览器"></a>写入数据后退出浏览器</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python">data = pd.DataFrame(jobs).T<br>data.to_csv(<span class="hljs-string">&#x27;crawler/job_lagou/lougou_data_&#123;0&#125;_&#123;1&#125;.csv&#x27;</span>.<span class="hljs-built_in">format</span>(city, job))<br>browser.quit()<br></code></pre></td></tr></table></figure>
+
+<h3 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h3><p><a target="_blank" rel="noopener" href="https://github.com/bbbbbbbin/crawler/tree/master/job_lagou">完整代码-github</a></p>
+<p>对于一些隐藏的信息，例如：鼠标悬浮才会出现的悬浮框信息，该信息不是通过隐藏页面元素进行隐藏，而是通过js脚本将满足条件的信息显示出来，可以通过selenium的模拟鼠标操作进行获取，当然也可以学习相关js脚本逆向注入等方式获取，这是以后可以学习的方向。</p>
+<p>单纯的将数据存储在文件中还是比较基础和简单，后续可以学习连接数据库，将数据存储在数据库中。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E7%88%AC%E8%99%AB/" class="category-chain-item">爬虫</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/selenium/">#selenium</a>
+      
+        <a href="/tags/beautifulsoup/">#beautifulsoup</a>
+      
+        <a href="/tags/re/">#re</a>
+      
+        <a href="/tags/%E6%8B%89%E5%8B%BE%E7%BD%91/">#拉勾网</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>lagou_crawler</div>
+      <div>https://bbbbbbbin.github.io/2022/06/28/lagou-crawler/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>hcb</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年6月28日</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">
+              <span class="hint--top hint--rounded" aria-label="SA - 相同方式共享">
+                <i class="iconfont icon-sa"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/06/27/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%80%9D%E7%BB%B4/" title="数据分析思维学习笔记">
+                        <span class="hidden-mobile">数据分析思维学习笔记</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
